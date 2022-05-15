@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AitController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -17,8 +18,11 @@ Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/home', function () {
+    return view('home');
+})->middleware(['auth'])->name('home');
 
 require __DIR__.'/auth.php';
+
+Route::get('/home', [AitController::class, 'index']);
+Route::post('/store', [AitController::class, 'store']);
