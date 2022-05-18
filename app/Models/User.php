@@ -25,7 +25,7 @@ class User extends Authenticatable
         'orgao',
         'unidade',
         'funcao',
-        'senha',
+        'password',
     ];
 
     /**

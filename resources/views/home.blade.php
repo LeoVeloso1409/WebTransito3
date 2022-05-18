@@ -33,24 +33,41 @@
                             <div class="collapse navbar-collapse" id="navbarNav">
                                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                                     <li class="nav-item">
-                                        <a class="btn nav-link active" data-bs-toggle="modal" data-bs-target="#modal" aria-current="page" href="#">Novo AIT</a>
+                                        <a class="btn nav-link active" data-bs-toggle="modal" data-bs-target="#modal" aria-current="page">Novo AIT</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="btn nav-link" href="{{url('/register')}}">Cadastrar Usuário</a>
+                                        <a class="btn nav-link" href="{{route('register')}}">Cadastrar Usuário</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="btn nav-link" href="{{url('/home')}}">Pesquisar</a>
+                                        <a class="btn nav-link" href="{{url('/')}}">Pesquisar</a>
                                     </li>
                                 </ul>
                                 <ul class="col-lg navbar-nav mr-auto mt-2 mt-lg-0">
                                     <li class="nav-link"> </li>
                                 </ul>
-                                <span>
-                                    <a class="btn nav-link-light" href="{{url('/logout')}}">Sair</a>
-                                </span>
+                                <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
+                                    <span>
+                                        <div>
+                                            <form method="POST" action="{{ route('logout') }}">
+                                                @csrf
+                                                <li class="nav-item">
+                                                    <a class="btn nav-link" :href="route('logout')"
+                                                    onclick="event.preventDefault();
+                                                                this.closest('form').submit();">
+                                                    {{ __('Log Out') }}
+                                                    </a>
+                                                </li>
+                                            </form>
+                                        </div>
+                                    </span>
+                                </ul>
                             </div>
                         </div>
                     </nav>
+
+                    @php
+                        $user = Auth::user();
+                    @endphp
 
                     <div class="container bg-light mt-2 mb-2" id="body">
                         <div class="container-fluid w-75 m-auto p-4 position-static h-auto d-md-inline-flex d-none shadow-sm" id="headTable">
@@ -65,11 +82,11 @@
 
                                         <div class="row justify-content-around mt-4">
                                             <div class="col-md-4">
-                                                <input disabled type="text" class="form-control" placeholder="Matrícula">
+                                                <input disabled type="text" class="form-control" placeholder="{{$user->matricula}}">
                                             </div>
 
                                             <div class="col-md-7">
-                                                <input disabled type="text" class="form-control" placeholder="Nome">
+                                                <input disabled type="text" class="form-control" placeholder="{{$user->name}}">
                                             </div>
                                         </div>
                                     </div>
@@ -108,18 +125,16 @@
                                 </tbody>
                             </table>
                         </div>
+                        <footer class="page-footer align-content-center" id="footer">
+                            <div class="footer-copyright">
+                                <div class="container text-center">
+                                    <p class="font-sans text-secondary">Copyright &copy; 2022 by Leonardo Veloso Neves.<br>IFNMG - Pirapora/MG</p>
+                                </div>
+                            </div>
+                        </footer>
                     </div>
                 </div>
             </div>
-
-
-            <footer class="page-footer" id="footer">
-                <div class="footer-copyright">
-                    <div class="container center-align">
-                        <p>Copyright &copy; 2022 by Leonardo Veloso Neves.<br>IFNMG - Pirapora/MG</p>
-                    </div>
-                </div>
-            </footer>
 
             <!-- Modal -->
             <div class="modal fade" id="modal" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">

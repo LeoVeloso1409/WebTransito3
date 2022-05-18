@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Http\Requests\AitRequest;
 use App\Models\Ait;
 use App\Models\User;
 
@@ -46,7 +47,7 @@ class AitController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(AitRequest $request)
     {
         $ait = $this->objAit->create([
             'user_id'=>$request->user_id,
@@ -100,7 +101,7 @@ class AitController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(AitRequest $request, $id)
     {
         $ait = $this->objAit->where(['cod_ait'=>$id])->update([
             'placa'=>$request->placa,
