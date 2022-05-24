@@ -16,6 +16,18 @@
 
             <link rel="shortcut icon" type="imagex/png" href="assets/Imagens/logoSistema.png">
 
+            <!-- Fonts -->
+            <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700&display=swap">
+
+
+            <!-- Styles
+            <link rel="stylesheet" href="{{ asset('css/app.css') }}">
+             -->
+
+
+            <!-- Scripts -->
+            <script src="{{ asset('js/app.js') }}" defer></script>
+
             <!-- JavaScript Bundle with Popper -->
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
         </head>
@@ -29,7 +41,7 @@
 
                     <nav class="navbar navbar-expand-lg navbar-light bg-light sticky-top mt-2 mb-2 shadow-sm">
                         <div class="container-fluid">
-                            <a class="navbar-brand" href="{{url('/home')}}"> <img src="assets/Imagens/logoSistema.png" width="60"  alt=""></a>
+                            <a class="navbar-brand" href="{{url('/')}}"> <img src="assets/Imagens/logoSistema.png" width="60"  alt="Início"></a>
                             <div class="collapse navbar-collapse" id="navbarNav">
                                 <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
                                     <li class="nav-item">
@@ -39,7 +51,7 @@
                                         <a class="btn nav-link" href="{{route('register')}}">Cadastrar Usuário</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="btn nav-link" href="{{url('/')}}">Pesquisar</a>
+                                        <a class="btn nav-link" href="{{route('pesquisar')}}">Pesquisar</a>
                                     </li>
                                 </ul>
                                 <ul class="col-lg navbar-nav mr-auto mt-2 mt-lg-0">
@@ -72,16 +84,21 @@
                     <div class="container bg-light mt-2 mb-2" id="body">
                         <div class="container-fluid w-75 m-auto p-4 position-static h-auto d-md-inline-flex d-none shadow-sm" id="headTable">
                             <fieldset>
-                                <div class="row align-items-center">
+                                <div class="row align-items-center align-content-center">
                                     <div class="col-md-2">
                                         <img src="assets/Imagens/logoSistema.png" alt="Responsive image" width="200" height="150" id="img-header-form" class="border border-dark d-md-inline-flex">
                                     </div>
 
-                                    <div class="col-md-8 offset-md-2 ms-auto mt-1">
-                                        <h3 class="text-left">Auto de Infrações de Trânsito - AIT</h3>
-
-                                        <div class="row justify-content-around mt-4">
-                                            <div class="col-md-4">
+                                    <div class="col-md-8 offset-md-2 align-content-center">
+                                        <div class="row align-content-center mt-4">
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md">
+                                                <h4 class="text-align-center">Auto de Infrações de Trânsito - AIT</h4>
+                                            </div>
+                                        </div>
+                                        <div class="row align-content-center mt-4">
+                                            <div class="col-md-2"></div>
+                                            <div class="col-md-3">
                                                 <input disabled type="text" class="form-control" placeholder="{{$user->matricula}}">
                                             </div>
 
@@ -94,37 +111,11 @@
                             </fieldset>
                         </div>
 
-                        <div class="container-fluid w-75 m-auto p-4 position-static h-auto d-md-inline-flex d-none shadow-sm" id="table">
-                            <table class="table table-primary table-striped">
-                                <thead class="table-dark">
-                                  <tr>
-                                    <th scope="col">Código AIT</th>
-                                    <th scope="col">Código Infração</th>
-                                    <th scope="col">Placa</th>
-                                    <th scope="col">Agente</th>
-                                    <th scope="col">Matricula</th>
-                                    <th scope="col"></th>
-                                  </tr>
-                                </thead>
-                                <tbody>
-                                    @foreach ($aits as $ait)
-                                        @php
-                                            $user = $ait->find($ait->id)->relUsers;
-                                        @endphp
-                                        <tr>
-                                            <th scope="row">{{$ait->cod_ait}}</th>
-                                            <td>{{$ait->codigo_infracao}}</td>
-                                            <td>{{$ait->placa}}</td>
-                                            <td>{{$ait->nome}}</td>
-                                            <td>{{$ait->matricula}}</td>
-                                            <td>
-                                                <a href="{{url("/webtransito/edit/$ait->cod_ait")}}"> <button class="btn btn-secondary">Iniciar</button></a>
-                                            </td>
-                                        </tr>
-                                    @endforeach
-                                </tbody>
-                            </table>
-                        </div>
+                        @yield('index')
+                        @yield('register')
+                        @yield('editait')
+                        @yield('pesquisar')
+
                         <footer class="page-footer align-content-center" id="footer">
                             <div class="footer-copyright">
                                 <div class="container text-center">
@@ -145,18 +136,18 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div>
-                            <form method="POST" action="{{url("/webtransito/store")}}">
+                            <form method="POST" action="{{URL('store')}}">
                                 @csrf
 
                                 @php
                                     $cod_ait = App\Http\Controllers\WebtransitoController::gerarCodAit();
                                 @endphp
 
-                                <input hidden type="text" name="user_id" value="">
-                                <input hidden type="text" name="cod_ait" value="">
-                                <input hidden type="text" name="orgao_autuador" value="}">
-                                <input hidden type="text" name="matricula" value="">
-                                <input hidden type="text" name="nome" value="">
+                                <input hidden type="text" name="user_id" value="{{Auth::User()->id}}">
+                                <input hidden type="text" name="cod_ait" value="{{$cod_ait}}">
+                                <input hidden type="text" name="orgao_autuador" value="{{Auth::User()->orgao}}">
+                                <input hidden type="text" name="matricula" value="{{Auth::User()->matricula}}">
+                                <input hidden type="text" name="nome" value="{{Auth::User()->name}}">
 
                                 <div class="modal-body">
                                     <p>Ao Iniciar uma autuação ela não poderá mais ser cancelada.</p>

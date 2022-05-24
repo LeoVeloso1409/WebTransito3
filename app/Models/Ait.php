@@ -12,10 +12,6 @@ class Ait extends Model
     // Permitir Mass Assignment nos campos
     protected $fillable = [
 
-        'id_usuario',
-        'cod_ait',
-        'orgao_autuador',
-
         'placa',
         'marca',
         'modelo',
@@ -47,8 +43,6 @@ class Ait extends Model
         'ficha_vistoria',
         'imagem',
 
-        'matricula',
-        'nome',
     ];
 
     use HasFactory;

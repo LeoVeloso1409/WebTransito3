@@ -14,15 +14,10 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::get('/home', function () {
-    return view('home');
+    return view('index');
 })->middleware(['auth'])->name('home');
 
 require __DIR__.'/auth.php';
 
-Route::get('/home', [AitController::class, 'index']);
-Route::post('/store', [AitController::class, 'store']);
+

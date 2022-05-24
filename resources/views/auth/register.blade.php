@@ -1,45 +1,44 @@
-<x-guest-layout>
-    <x-auth-card>
+@extends('home')
 
-        <x-slot name="logo">
-            <a class="navbar-brand" href="{{url('/home')}}"> <img src="assets/Imagens/logoSistema.png" width="100"  alt=""></a>
-        </x-slot>
+@section('register')
+<div class="container-fluid w-75 m-auto p-4 position-static h-auto shadow-sm" id="register">
+    <form class="row g-3" method="POST" action="{{ route('register') }}">
 
-        <!-- Validation Errors -->
-        <x-auth-validation-errors class="mb-4" :errors="$errors" />
+        @csrf
 
-        <legend class="font-sans text-secondary">Cadastro de Usuário</legend>
+        <fieldset class="shadow-sm p-4">
 
-        <form class="row g-3" method="POST" action="{{ route('register') }}">
-            @csrf
+            <x-auth-validation-errors class="mb-4" :errors="$errors" />
 
-            <!-- Nome -->
-            <div>
-                <x-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" placeholder="Nome" required autofocus />
+            <legend>Cadastro de Usuário</legend>
+            <div class="row p-2">
+                <!-- Nome -->
+                <div class="col-md-5">
+                    <x-input id="name" class="form-control block mt-1 w-full" type="text" name="name" :value="old('name')"
+                        placeholder="Nome" required autofocus />
+                </div>
+
+                <!-- Matrícula -->
+                <div class="col-md-3">
+                    <x-input id="matricula" class="form-control block mt-1 w-full" type="text" name="matricula"
+                        :value="old('matricula')" placeholder="Matrícula" required autofocus />
+                </div>
+
+                <!-- Email -->
+                <div class="col-md-4">
+                    <x-input id="email" class="form-control block mt-1 w-full" type="email" name="email" :value="old('email')"
+                        placeholder="Email" required />
+                </div>
             </div>
-
-            <!-- Matrícula -->
-            <div class="mt-4">
-                <x-input id="matricula" class="block mt-1 w-full" type="text" name="matricula" :value="old('matricula')" placeholder="Matrícula" required autofocus />
-            </div>
-
-            <!-- Email -->
-            <div class="mt-4">
-                <x-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" placeholder="Email" required />
-            </div>
-
-            <div class="row mt-4">
-                <!-- Orgão -->
-                <div class="col">
+            <div class="row p-2">
+                <div class="col-md-4">
                     <select id="orgao" name="orgao" class="form-select" required>
                         <option selected>Orgão</option>
                         <option value="PMMG">PMMG</option>
                         <option value="PCMG">PCMG</option>
                     </select>
                 </div>
-
-                <!-- Unidade -->
-                <div class="col" >
+                <div class="col-md-4">
                     <select id="unidade" name="unidade" class="form-select" required>
                         <option selected>Unidade</option>
                         <option value="1 BPM">1 BPM</option>
@@ -47,40 +46,39 @@
                         <option value="3 BPM">3BPM</option>
                         <option value="...">...</option>
                         <option value="55 BPM">55BPM</option>
+
                     </select>
                 </div>
-
-                <!-- Função -->
-                <div class="col">
+                <div class="col-md-4">
                     <select id="funcao" name="funcao" class="form-select" required>
                         <option selected>Função</option>
-                        <option value="ADMIN">ADMIN</option>
+                        <option value="ADMIN">ADMINISTRADOR</option>
                         <option value="AGENTE">AGENTE</option>
                     </select>
                 </div>
             </div>
+            <div class="row p-2">
+                <!-- Password -->
+                <div class="col-md-4">
+                    <x-input id="password" class="form-control block mt-1 w-full" type="password" name="password"
+                        placeholder="Senha" required />
+                </div>
 
-            <!-- Password -->
-            <div class="mt-4">
-                <x-label for="password" :value="__('Password')" />
-                <x-input id="password" class="block mt-1 w-full" type="password" name="password" placeholder="Senha" required />
-            </div>
-
-            <!-- Confirm Password -->
-            <div class="mt-4">
-                <x-label for="password_confirmation" :value="__('Confirm Password')" />
-                <x-input id="password_confirmation" class="block mt-1 w-full" type="password" name="password_confirmation" placeholder="Confirmar Senha" required />
-            </div>
-
-            <div class="flex items-center justify-center mt-4">
-                <div class="row p-2">
-                    <div class="col-6">
-                        <x-button>
-                            {{ __('Cadastrar') }}
-                        </x-button>
-                    </div>
+                <!-- Confirm Password -->
+                <div class="col-md-4">
+                    <x-input id="password_confirmation" class="form-control block mt-1 w-full" type="password"
+                        name="password_confirmation" placeholder="Confirmar Senha" required />
                 </div>
             </div>
-        </form>
-    </x-auth-card>
-</x-guest-layout>
+        </fieldset>
+
+        <fieldset>
+            <div class="row p-2">
+                <div class="col-12">
+                    <button type="submit" class="btn btn-primary">Cadastrar</button>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
+@endsection

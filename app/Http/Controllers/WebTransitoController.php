@@ -3,25 +3,25 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class WebTransitoController extends Controller
 {
     public static function gerarCodAit(){
 
-        $cod_ait = 'PM-'.date('Y').'-'.idate('U');
-        return $cod_ait;
+        $orgao = Auth::user()->orgao;
 
-        /*
-        $users = $this->objUser->all();
-        //$user = $users->find($id);
-        if($users->orgao === 'pmmg'){
+        if($orgao === 'PMMG'){
             $cod_ait = 'PM-'.date('Y').'-'.idate('U');
             return $cod_ait;
         }
-        if($users->orgao === 'pcmg'){
+        if($orgao === 'PCMG'){
             $cod_ait = 'PC-'.date('Y').'-'.idate('U');
             return $cod_ait;
         }
-        */
+    }
+
+    public static function pesquisar(){
+        return view('ait.pesquisar');
     }
 }

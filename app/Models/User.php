@@ -19,7 +19,7 @@ class User extends Authenticatable
      */
     protected $fillable = [
 
-        'nome',
+        'name',
         'matricula',
         'email',
         'orgao',
@@ -34,7 +34,7 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $hidden = [
-        'senha',
+        'password',
         'remember_token',
     ];
 
@@ -48,6 +48,6 @@ class User extends Authenticatable
     ];
 
     public function relAits(){
-        return $this->hasMany('App\Models\ModelAit', 'user_id');
+        return $this->hasMany('App\Models\Ait', 'user_id');
     }
 }

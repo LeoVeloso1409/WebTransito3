@@ -7,6 +7,7 @@ use App\Http\Requests\Auth\LoginRequest;
 use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use App\Models\Ait;
 
 class AuthenticatedSessionController extends Controller
 {
@@ -26,13 +27,26 @@ class AuthenticatedSessionController extends Controller
      * @param  \App\Http\Requests\Auth\LoginRequest  $request
      * @return \Illuminate\Http\RedirectResponse
      */
+
+    public function index()
+    {
+        $user_id = Auth::user()->id;
+        $aits = Ait::all()->where('user_id', $user_id )->sortBy('cod_ait');
+
+        return view('index', compact('aits'));
+    }
+
     public function store(LoginRequest $request)
     {
+
         $request->authenticate();
 
         $request->session()->regenerate();
 
+        //dd($aits);
+
         return redirect()->intended(RouteServiceProvider::HOME);
+        //return view('home', compact('aits'));
     }
 
     /**

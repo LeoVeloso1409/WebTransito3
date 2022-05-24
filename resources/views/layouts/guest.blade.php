@@ -28,17 +28,7 @@
     </head>
     <body>
         <div class="font-sans text-gray-900 antialiased">
-            <div class="container-fluid align-content-center w-100 shadow-lg">
-                <header class="text-center mb-1 bg-info align-content-center p-auto d-block" id="header">
-                    <h1 class="text-center text-capitalize"><b>WebTrânsito</b></h1>
-                </header>
-
-                <header class="text-center mb-2 bg-light align-content-center p-auto d-block">
-                    <h3 class="text-center"><b>Sistema Auto de Infração de Trânsito - SAIT</b></h3>
-                </header>
-            </div>
             {{ $slot }}
-
         </div>
     </body>
 </html>

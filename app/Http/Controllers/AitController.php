@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Http\Requests\AitRequest;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Support\Facades\Auth;
 use App\Models\Ait;
 use App\Models\User;
 
@@ -15,20 +17,11 @@ class AitController extends Controller
      * @return \Illuminate\Http\Response
      */
 
-    private $objUser;
     private $objAit;
 
     public function __construct(){
         $this->objUser = new User();
         $this->objAit = new Ait();
-    }
-
-    public function index()
-    {
-
-        $aits = $this->objAit->all()->sortBy('cod_ait');
-
-        return view('home', compact('aits'));
     }
 
     /**
@@ -38,7 +31,9 @@ class AitController extends Controller
      */
     public function create()
     {
-        //
+        $aits = $this->objAit->all()->sortBy('cod_ait');
+
+        return view('home', compact('aits'));
     }
 
     /**
@@ -47,9 +42,17 @@ class AitController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(AitRequest $request)
+    public function store(Request $request)
     {
-        $ait = $this->objAit->create([
+        $request->validate([
+            'user_id' => ['required'],
+            'cod_ait' => ['required'],
+            'orgao_autuador' => ['required'],
+            'matricula' => ['required'],
+            'nome' => ['required'],
+        ]);
+
+        $ait = Ait::create([
             'user_id'=>$request->user_id,
             'cod_ait'=>$request->cod_ait,
             'orgao_autuador'=>$request->orgao_autuador,
@@ -58,7 +61,7 @@ class AitController extends Controller
         ]);
 
         if($ait){
-            return redirect()->intended('\edit'.$request->cod_ait);
+            return redirect(RouteServiceProvider::HOME);
         }
         else{
             return redirect()->back()->with('msgError', 'Erro de Execução.');
@@ -85,13 +88,11 @@ class AitController extends Controller
     public function edit($id)
     {
         // dd("edit");
-        $ait = $this->objAit->where("cod_ait", $id)->first();
+        $ait = Ait::where("cod_ait", $id)->first();
 
         //dd($ait);
 
-        $users = $this->objUser->all();
-
-        return view('ait.edit', compact('ait', 'users'));
+        return view('ait.edit', compact('ait'));
     }
 
     /**
@@ -103,7 +104,7 @@ class AitController extends Controller
      */
     public function update(AitRequest $request, $id)
     {
-        $ait = $this->objAit->where(['cod_ait'=>$id])->update([
+        Ait::where(['cod_ait'=>$id])->update([
             'placa'=>$request->placa,
             'marca'=>$request->marca,
             'modelo'=>$request->modelo,
@@ -141,12 +142,8 @@ class AitController extends Controller
             'imagem'=>$request->imagem,
         ]);
 
-        if($ait){
-            return redirect()->intended('/home');
-        }
-        else{
-            return redirect()->back()->with('msgError', 'Erro de Execução.');
-        }
+        return redirect(RouteServiceProvider::HOME);
+
     }
 
     /**
@@ -160,23 +157,4 @@ class AitController extends Controller
         //
     }
 
-    public static function gerarCodAit(){
-
-        $cod_ait = date('Y').'-PM-'.idate('U');
-        return $cod_ait;
-
-        /*
-        $users = $this->objUser->all();
-        //$user = $users->find($id);
-
-        if($users->orgao === 'pmmg'){
-            $cod_ait = 'PM-'.date('Y').'-'.idate('U');
-            return $cod_ait;
-        }
-        if($users->orgao === 'pcmg'){
-            $cod_ait = 'PC-'.date('Y').'-'.idate('U');
-            return $cod_ait;
-        }
-        */
-    }
 }
