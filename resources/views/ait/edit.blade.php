@@ -1,5 +1,5 @@
 @extends('home')
-@section('editait')
+@section('conteudo')
     <div class="row justify-content-around p-4">
         <div class="col-md-9 w-25 align">
             <div class="input-group">
@@ -10,32 +10,33 @@
     </div>
     <div class="container-fluid w-75 m-auto p-4 position-static h-auto d-md-inline-flex d-none shadow-sm" id="formAit">
 
-        <form class="row g-3" method="POST" action="{{URL('updateait/'.$ait->cod_ait)}}">
+        <form class="row g-3" method="POST" action="{{route('update.ait', ['id' => $ait->cod_ait])}}">
 
             @csrf
+            @method('PATCH')
 
             <fieldset class="shadow-sm p-4">
                 <legend>Identificação do Veículo</legend>
                 <div class="row p-2">
                     <div class="col-md-3">
-                        <input type="text" name="placa" class="form-control" id="placa" placeholder="Placa" required>
+                        <input type="text" name="placa" class="form-control" id="UpCase" placeholder="Placa" required>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" name="marca" class="form-control" id="marca" placeholder="Marca" required>
+                        <input type="text" name="marca" class="form-control" id="UpCase" placeholder="Marca" required>
                     </div>
                     <div class="col-md-5">
-                        <input type="text" name="modelo" class="form-control" id="modelo" placeholder="Modelo" required>
+                        <input type="text" name="modelo" class="form-control" id="UpCase" placeholder="Modelo" required>
                     </div>
                 </div>
                 <div class="row p-2">
                     <div class="col-md-3">
-                        <input type="text" name="cor" class="form-control" id="cor" placeholder="Cor" required>
+                        <input type="text" name="cor" class="form-control" id="UpCase" placeholder="Cor" required>
                     </div>
                     <div class="col-md-3">
-                        <input type="text" name="chassi" class="form-control" id="chassi" placeholder="Chassi">
+                        <input type="text" name="chassi" class="form-control" id="UpCase" placeholder="Chassi">
                     </div>
                     <div class="col-md-3">
-                        <input type="text" name="pais" class="form-control" id="pais" placeholder="Pais" required>
+                        <input type="text" name="pais" class="form-control" id="UpCase" placeholder="Pais" required>
                     </div>
                     <div class="col-md-3">
                         <select id="especie" name="especie" class="form-select" required>
@@ -56,19 +57,18 @@
                 <legend>Identificação do Condutor</legend>
                 <div class="row p-2">
                     <div class="col-md-6">
-                        <input type="text" name="nome_condutor" class="form-control" id="nome_condutor"
-                            placeholder="Nome">
+                        <input type="text" name="nome_condutor" class="form-control" id="UpCase" placeholder="Nome">
                     </div>
                     <div class="col-md-3">
-                        <input type="text" name="cpf_condutor" class="form-control" id="cpf_condutor" placeholder="CPF">
+                        <input type="text" name="cpf_condutor" class="form-control" id="UpCase" placeholder="CPF">
                     </div>
                     <div class="col-md-3">
-                        <input type="text" name="rg_condutor" class="form-control" id="rg_condutor" placeholder="RG">
+                        <input type="text" name="rg_condutor" class="form-control" id="UpCase" placeholder="RG">
                     </div>
                 </div>
                 <div class="row p-2">
                     <div class="col-md-3">
-                        <input type="text" name="cnh_condutor" class="form-control" id="cnh_condutor" placeholder="CNH">
+                        <input type="text" name="cnh_condutor" class="form-control" id="UpCase" placeholder="CNH">
                     </div>
                     <div class="col-md-3">
                         <select id="uf_cnh" name="uf_cnh" class="form-select" placeholder="UF-CNH">
@@ -102,17 +102,17 @@
                 <legend>Local/Data/Hora</legend>
                 <div class="row p-2">
                     <div class="col-md-5">
-                        <input type="text" name="logradouro" class="form-control" id="logradouro" placeholder="Logradouro"
+                        <input type="text" name="logradouro" class="form-control" id="UpCase" placeholder="Logradouro"
                             required>
                     </div>
                     <div class="col-md-2">
-                        <input type="text" name="numero" class="form-control" id="numero" placeholder="Número" required>
+                        <input type="text" name="numero" class="form-control" id="UpCase" placeholder="Número" required>
                     </div>
                     <div class="col-md-2">
-                        <input type="text" name="bairro" class="form-control" id="bairro" placeholder="Bairro" required>
+                        <input type="text" name="bairro" class="form-control" id="UpCase" placeholder="Bairro" required>
                     </div>
                     <div class="col-md-3">
-                        <input type="text" name="cidade" class="form-control" id="cidade" placeholder="Cidade" required>
+                        <input type="text" name="cidade" class="form-control" id="UpCase" placeholder="Cidade" required>
                     </div>
                 </div>
                 <div class="row p-2">
@@ -123,8 +123,7 @@
                         <input type="time" name="hora" class="form-control" id="hora" required>
                     </div>
                     <div class="col-md-2">
-                        <input disabled type="text" name="uf_mg" value="MG" class="form-control" id="uf_mg"
-                            placeholder="UF-MG">
+                        <input disabled type="text" name="uf_mg" value="MG" class="form-control" id="uf_mg" placeholder="UF-MG">
                     </div>
                 </div>
             </fieldset>
@@ -133,35 +132,35 @@
                 <legend>Identificação da Infração</legend>
                 <div class="row p-2">
                     <div class="col-md-3">
-                        <input type="text" name="codigo_infracao" class="form-control" id="codigo_infracao"
+                        <input type="text" name="codigo_infracao" class="form-control" id="UpCase"
                             placeholder="Código da Infração" required>
                     </div>
                     <div class="col-md-9">
-                        <input type="text" name="descricao" class="form-control" id="descricao" placeholder="Descrição"
+                        <input type="text" name="descricao" class="form-control" id="UpCase" placeholder="Descrição"
                             required>
                     </div>
                 </div>
                 <div class="row p-2">
                     <div class="col-md-3">
-                        <input type="text" name="equipamento_afericao" class="form-control" id="equipamento_afericao"
+                        <input type="text" name="equipamento_afericao" class="form-control" id="UpCase"
                             placeholder="Equipamento Aferição">
                     </div>
                     <div class="col-md-3">
-                        <input type="text" name="medicao_realizada" class="form-control" id="medicao_realizada"
+                        <input type="text" name="medicao_realizada" class="form-control" id="UpCase"
                             placeholder="Medição Realizada">
                     </div>
                     <div class="col-md-3">
-                        <input type="text" name="limite_regulamentado" class="form-control" id="limite_regulamentado"
+                        <input type="text" name="limite_regulamentado" class="form-control" id="UpCase"
                             placeholder="Limite Regulamentado">
                     </div>
                     <div class="col-md-3">
-                        <input type="text" name="valor_considerado" class="form-control" id="valor_considerado"
+                        <input type="text" name="valor_considerado" class="form-control" id="UpCase"
                             placeholder="Valor Considerado">
                     </div>
                 </div>
                 <div class="row p-2">
                     <div class="col-md">
-                        <textarea type="text" name="observacoes" class="form-control" id="observacoes" placeholder="Observações"></textarea>
+                        <textarea type="text" name="observacoes" class="form-control" id="UpCase" placeholder="Observações"></textarea>
                     </div>
                 </div>
             </fieldset>
@@ -188,7 +187,7 @@
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" name="ficha_vistoria" class="form-control" id="ficha_vistoria"
+                        <input type="text" name="ficha_vistoria" class="form-control" id="UpCase"
                             placeholder="Ficha de Vistoria">
                     </div>
                 </div>

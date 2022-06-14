@@ -33,6 +33,7 @@ class AitController extends Controller
     {
         $aits = $this->objAit->all()->sortBy('cod_ait');
 
+        //dd($aits);
         return view('home', compact('aits'));
     }
 
@@ -44,6 +45,7 @@ class AitController extends Controller
      */
     public function store(Request $request)
     {
+
         $request->validate([
             'user_id' => ['required'],
             'cod_ait' => ['required'],
@@ -60,6 +62,7 @@ class AitController extends Controller
             'nome'=>$request->nome,
         ]);
 
+        //dd($ait);
         if($ait){
             return redirect(RouteServiceProvider::HOME);
         }
@@ -102,9 +105,29 @@ class AitController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(AitRequest $request, $id)
+    public function update(Request $request, $id)
     {
-        Ait::where(['cod_ait'=>$id])->update([
+        //$ait = Ait::where(['cod_ait'=>$id])->update($request->all());
+
+        $request->validate([
+            'placa' => ['required', 'max:7', 'min:7'],
+            'marca' => ['required'],
+            'modelo' => ['required'],
+            'cor' => ['required'],
+            'pais' => ['required'],
+            'especie' => ['required'],
+            'logradouro' => ['required'],
+            'numero' => ['required'],
+            'bairro' => ['required'],
+            'cidade' => ['required'],
+            'data' => ['required', 'date'],
+            'hora' => ['required'],
+            'codigo_infracao' => ['required', 'numeric'],
+            'descricao' => ['required'],
+
+        ]);
+
+        $ait = Ait::where(['cod_ait'=>$id])->update([
             'placa'=>$request->placa,
             'marca'=>$request->marca,
             'modelo'=>$request->modelo,
@@ -140,10 +163,16 @@ class AitController extends Controller
             'ficha_vistoria'=>$request->ficha_vistoria,
 
             'imagem'=>$request->imagem,
+
+            'status'=> 1,
         ]);
 
-        return redirect(RouteServiceProvider::HOME);
-
+        if($ait){
+            return redirect(RouteServiceProvider::HOME);
+        }
+        else{
+            return redirect()->back()->with('msgError', 'Erro de Execução.');
+        }
     }
 
     /**

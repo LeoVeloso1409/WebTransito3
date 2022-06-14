@@ -50,4 +50,10 @@ class User extends Authenticatable
     public function relAits(){
         return $this->hasMany('App\Models\Ait', 'user_id');
     }
+
+    public function setNameAttribute($value)
+    {
+        $this->attributes['name'] = mb_strtoupper($value);
+
+    }
 }

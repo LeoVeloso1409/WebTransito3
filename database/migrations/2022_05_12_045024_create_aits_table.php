@@ -20,15 +20,15 @@ class CreateAitsTable extends Migration
             $table->foreign('user_id')->references('id')->on('users');
 
             $table->string('cod_ait')->unique()->require();
-            $table->string('orgao_autuador');
+            $table->string('orgao_autuador')->require();
 
-            $table->string('placa')->nullable();
-            $table->string('marca')->nullable();
-            $table->string('modelo')->nullable();
-            $table->string('cor')->nullable();
+            $table->string('placa')->nullable()->require();
+            $table->string('marca')->nullable()->require();
+            $table->string('modelo')->nullable()->require();
+            $table->string('cor')->nullable()->require();
             $table->string('chassi')->nullable();
-            $table->string('pais')->nullable();
-            $table->string('especie')->nullable();
+            $table->string('pais')->nullable()->require();
+            $table->string('especie')->nullable()->require();
             $table->string('nome_condutor')->nullable();
             $table->string('cpf_condutor')->nullable();
             $table->string('rg_condutor')->nullable();
@@ -36,14 +36,14 @@ class CreateAitsTable extends Migration
             $table->string('uf_cnh')->nullable();
             $table->string('categoria_cnh')->nullable();
             $table->string('validade_cnh')->nullable();
-            $table->string('logradouro')->nullable();
-            $table->string('numero')->nullable();
-            $table->string('bairro')->nullable();
-            $table->string('cidade')->nullable();
-            $table->string('data')->nullable();
-            $table->string('hora')->nullable();
-            $table->string('uf_mg')->nullable();
-            $table->string('codigo_infracao')->nullable();
+            $table->string('logradouro')->nullable()->require();
+            $table->string('numero')->nullable()->require();
+            $table->string('bairro')->nullable()->require();
+            $table->string('cidade')->nullable()->require();
+            $table->string('data')->nullable()->require();
+            $table->string('hora')->nullable()->require();
+            $table->string('uf_mg')->nullable()->require();
+            $table->string('codigo_infracao')->nullable()->require();
             $table->string('descricao')->nullable();
             $table->string('equipamento_afericao')->nullable();
             $table->string('medicao_realizada')->nullable();
@@ -54,8 +54,10 @@ class CreateAitsTable extends Migration
             $table->string('medida2')->nullable();
             $table->string('ficha_vistoria')->nullable();
             $table->string('imagem')->nullable();
-            $table->string('matricula');
-            $table->string('nome');
+            $table->string('matricula')->require();
+            $table->string('nome')->require();
+
+            $table->boolean('status')->nullable();
 
             $table->timestamps();
         });

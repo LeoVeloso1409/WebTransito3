@@ -1,6 +1,6 @@
 @extends('home')
 
-@section('register')
+@section('conteudo')
 <div class="container-fluid w-75 m-auto p-4 position-static h-auto shadow-sm" id="register">
     <form class="row g-3" method="POST" action="{{ route('register') }}">
 
@@ -13,13 +13,13 @@
             <legend>Cadastro de Usuário</legend>
             <div class="row p-2">
                 <!-- Nome -->
-                <div class="col-md-5">
+                <div class="col-md-4">
                     <x-input id="name" class="form-control block mt-1 w-full" type="text" name="name" :value="old('name')"
                         placeholder="Nome" required autofocus />
                 </div>
 
                 <!-- Matrícula -->
-                <div class="col-md-3">
+                <div class="col-md-4">
                     <x-input id="matricula" class="form-control block mt-1 w-full" type="text" name="matricula"
                         :value="old('matricula')" placeholder="Matrícula" required autofocus />
                 </div>
@@ -30,15 +30,16 @@
                         placeholder="Email" required />
                 </div>
             </div>
+
             <div class="row p-2">
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <select id="orgao" name="orgao" class="form-select" required>
                         <option selected>Orgão</option>
                         <option value="PMMG">PMMG</option>
                         <option value="PCMG">PCMG</option>
                     </select>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <select id="unidade" name="unidade" class="form-select" required>
                         <option selected>Unidade</option>
                         <option value="1 BPM">1 BPM</option>
@@ -49,14 +50,22 @@
 
                     </select>
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-3">
                     <select id="funcao" name="funcao" class="form-select" required>
                         <option selected>Função</option>
                         <option value="ADMIN">ADMINISTRADOR</option>
                         <option value="AGENTE">AGENTE</option>
                     </select>
                 </div>
+                <div class="col-md-3">
+                    <select id="status" name="status" class="form-select" required>
+                        <option selected>Situação</option>
+                        <option value="ATIVO">ATIVO</option>
+                        <option value="INATIVO">INATIVO</option>
+                    </select>
+                </div>
             </div>
+
             <div class="row p-2">
                 <!-- Password -->
                 <div class="col-md-4">

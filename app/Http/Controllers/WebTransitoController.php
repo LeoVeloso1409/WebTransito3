@@ -1,12 +1,14 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Models\Ait;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
 class WebTransitoController extends Controller
 {
+
     public static function gerarCodAit(){
 
         $orgao = Auth::user()->orgao;

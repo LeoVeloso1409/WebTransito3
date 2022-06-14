@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Validation\Rules;
+use Illuminate\Support\Facades\Gate;
 
 class RegisteredUserController extends Controller
 {
@@ -20,6 +21,9 @@ class RegisteredUserController extends Controller
      */
     public function create()
     {
+        if(Gate::denies('register_user')){
+            abort(403, 'Acesso Negado');
+        }
         return view('auth.register');
     }
 

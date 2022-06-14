@@ -31,9 +31,10 @@ class AuthenticatedSessionController extends Controller
     public function index()
     {
         $user_id = Auth::user()->id;
-        $aits = Ait::all()->where('user_id', $user_id )->sortBy('cod_ait');
+        $aitsFalse = Ait::all()->where('user_id', $user_id )->where('status', false)->sortBy('cod_ait');
+        $aitsTrue = Ait::all()->where('user_id', $user_id )->where('status', true)->sortBy('cod_ait');
 
-        return view('index', compact('aits'));
+        return view('index', compact('aitsFalse', 'aitsTrue'));
     }
 
     public function store(LoginRequest $request)

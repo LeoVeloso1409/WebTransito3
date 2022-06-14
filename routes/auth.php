@@ -9,8 +9,6 @@ use App\Http\Controllers\Auth\PasswordResetLinkController;
 use App\Http\Controllers\Auth\RegisteredUserController;
 use App\Http\Controllers\Auth\VerifyEmailController;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AitController;
-use App\Http\Controllers\WebTransitoController;
 
 Route::middleware('guest')->group(function () {
 
@@ -28,22 +26,6 @@ Route::middleware('guest')->group(function () {
 });
 
 Route::middleware('auth')->group(function () {
-
-    Route::get('index', [AuthenticatedSessionController::class, 'index'])->name('home');
-
-    Route::get('create', [AitController::class, 'create'])->name('createait');
-
-    Route::post('store', [AitController::class, 'store']);
-
-    Route::get('register', [RegisteredUserController::class, 'create'])->name('register');
-
-    Route::post('register', [RegisteredUserController::class, 'store']);
-
-    Route::get('editait/{id}',  [AitController::class, 'edit'])->name('editait');
-
-    Route::post('updateait/{id}',  [AitController::class, 'update']);
-
-    Route::get('pesquisar', [WebTransitoController::class, 'pesquisar'])->name('pesquisar');
 
     Route::get('verify-email', [EmailVerificationPromptController::class, '__invoke'])->name('verification.notice');
 
