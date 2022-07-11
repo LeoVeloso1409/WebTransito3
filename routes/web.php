@@ -34,12 +34,20 @@ Route::middleware('auth')->group(function () {
 
     Route::post('store-ait', [AitController::class, 'store'])->name('store.ait');
 
-    Route::get('show-ait/{id}',  [AitController::class, 'show'])->name('show.ait');
-
     Route::get('edit-ait/{id}',  [AitController::class, 'edit'])->name('edit.ait');
 
     Route::patch('edit-ait/{id}',  [AitController::class, 'update'])->name('update.ait');
 
-    Route::get('pesquisar', [WebTransitoController::class, 'pesquisar'])->name('pesquisar');
+    Route::get('pesquisar-ait', [WebTransitoController::class, 'pesquisarAit'])->name('pesquisar');
+
+    Route::post('ait-busca-cod_ait', [WebTransitoController::class, 'buscaCod_Ait'])->name('buscar.cod.ait');
+
+    Route::post('ait-busca-avancada', [WebTransitoController::class, 'buscaAvancada'])->name('buscar.avancada.ait');
+
+    Route::get('pesquisar-ait/meus-registros', [WebTransitoController::class, 'meusRegistros'])->name('meus_registros');
+
+    Route::get('imprimir-ait/{id}',  [WebTransitoController::class, 'imprimirAit'])->name('imprimir.ait');
+
+    Route::get('imprimir-ait/pdf',  [WebTransitoController::class, 'gerarPDF'])->name('imprimirPDF.ait');
 
 });

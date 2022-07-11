@@ -10,6 +10,12 @@
     </div>
     <div class="container-fluid w-75 m-auto p-4 position-static h-auto d-md-inline-flex d-none shadow-sm" id="formAit">
 
+        <ul class="error">
+            @foreach($errors->all() as $error)
+            <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+
         <form class="row g-3" method="POST" action="{{route('update.ait', ['id' => $ait->cod_ait])}}">
 
             @csrf
@@ -19,27 +25,28 @@
                 <legend>Identificação do Veículo</legend>
                 <div class="row p-2">
                     <div class="col-md-3">
-                        <input type="text" name="placa" class="form-control" id="UpCase" placeholder="Placa" required>
+                        <input type="text" name="placa" value="{{old('placa')}}" class="form-control" placeholder="Placa" required>
+                            @if ($errors->has('placa'))<h1 class="alert alert-warning">{{$errors->first('placa')}}</h1> @endif
                     </div>
                     <div class="col-md-4">
-                        <input type="text" name="marca" class="form-control" id="UpCase" placeholder="Marca" required>
+                        <input type="text" name="marca" value="{{old('marca')}}" class="form-control" placeholder="Marca" required>
                     </div>
                     <div class="col-md-5">
-                        <input type="text" name="modelo" class="form-control" id="UpCase" placeholder="Modelo" required>
+                        <input type="text" name="modelo" value="{{old('modelo')}}" class="form-control" placeholder="Modelo" required>
                     </div>
                 </div>
                 <div class="row p-2">
                     <div class="col-md-3">
-                        <input type="text" name="cor" class="form-control" id="UpCase" placeholder="Cor" required>
+                        <input type="text" name="cor" value="{{old('cor')}}" class="form-control" placeholder="Cor" required>
                     </div>
                     <div class="col-md-3">
-                        <input type="text" name="chassi" class="form-control" id="UpCase" placeholder="Chassi">
+                        <input type="text" name="chassi" value="{{old('chassi')}}" class="form-control" placeholder="Chassi">
                     </div>
                     <div class="col-md-3">
-                        <input type="text" name="pais" class="form-control" id="UpCase" placeholder="Pais" required>
+                        <input type="text" name="pais" value="{{old('placa')}}" class="form-control" placeholder="Pais" required>
                     </div>
                     <div class="col-md-3">
-                        <select id="especie" name="especie" class="form-select" required>
+                        <select id="especie" name="especie" value="{{old('especie')}}" class="form-select" required>
                             <option selected>Espécie</option>
                             <option value="PASSAGEIRO">Passageiro</option>
                             <option value="CARGA">Carga</option>
@@ -57,21 +64,21 @@
                 <legend>Identificação do Condutor</legend>
                 <div class="row p-2">
                     <div class="col-md-6">
-                        <input type="text" name="nome_condutor" class="form-control" id="UpCase" placeholder="Nome">
+                        <input type="text" name="nome_condutor" value="{{old('nome_condutor')}}" class="form-control" placeholder="Nome">
                     </div>
                     <div class="col-md-3">
-                        <input type="text" name="cpf_condutor" class="form-control" id="UpCase" placeholder="CPF">
+                        <input type="text" name="cpf_condutor" value="{{old('cpf_condutor')}}" class="form-control" placeholder="CPF">
                     </div>
                     <div class="col-md-3">
-                        <input type="text" name="rg_condutor" class="form-control" id="UpCase" placeholder="RG">
+                        <input type="text" name="rg_condutor" value="{{old('rg_condutor')}}" class="form-control" placeholder="RG">
                     </div>
                 </div>
                 <div class="row p-2">
                     <div class="col-md-3">
-                        <input type="text" name="cnh_condutor" class="form-control" id="UpCase" placeholder="CNH">
+                        <input type="text" name="cnh_condutor" value="{{old('cnh_condutor')}}" class="form-control" placeholder="CNH">
                     </div>
                     <div class="col-md-3">
-                        <select id="uf_cnh" name="uf_cnh" class="form-select" placeholder="UF-CNH">
+                        <select id="uf_cnh" name="uf_cnh" value="{{old('uf_cnh')}}" class="form-select" placeholder="UF-CNH">
                             <option selected>UF-CNH</option>
                             <option value="MG">MG</option>
                             <option value="SP">SP</option>
@@ -81,7 +88,7 @@
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <select id="categoria" name="categoria" class="form-select" placeholder="Categoria">
+                        <select id="categoria" name="categoria" value="{{old('categoria')}}" class="form-select" placeholder="Categoria">
                             <option selected>Categoria</option>
                             <option value="A">A</option>
                             <option value="AB">AB</option>
@@ -93,7 +100,7 @@
                         </select>
                     </div>
                     <div class="col-md-3">
-                        <input type="date" name="validade_cnh" class="form-control" id="validade_cnh">
+                        <input type="date" name="validade_cnh" value="{{old('validade_cnh')}}" class="form-control" id="validade_cnh">
                     </div>
                 </div>
             </fieldset>
@@ -102,28 +109,28 @@
                 <legend>Local/Data/Hora</legend>
                 <div class="row p-2">
                     <div class="col-md-5">
-                        <input type="text" name="logradouro" class="form-control" id="UpCase" placeholder="Logradouro"
+                        <input type="text" name="logradouro" value="{{old('logradouro')}}" class="form-control" placeholder="Logradouro"
                             required>
                     </div>
                     <div class="col-md-2">
-                        <input type="text" name="numero" class="form-control" id="UpCase" placeholder="Número" required>
+                        <input type="text" name="numero" value="{{old('numero')}}" class="form-control" placeholder="Número" required>
                     </div>
                     <div class="col-md-2">
-                        <input type="text" name="bairro" class="form-control" id="UpCase" placeholder="Bairro" required>
+                        <input type="text" name="bairro" value="{{old('bairro')}}" class="form-control" placeholder="Bairro" required>
                     </div>
                     <div class="col-md-3">
-                        <input type="text" name="cidade" class="form-control" id="UpCase" placeholder="Cidade" required>
+                        <input type="text" name="cidade" value="{{old('cidade')}}" class="form-control" placeholder="Cidade" required>
                     </div>
                 </div>
                 <div class="row p-2">
                     <div class="col-md-5">
-                        <input type="date" name="data" class="form-control" id="data" required>
+                        <input type="date" name="data" value="{{old('data')}}" class="form-control" id="data" required>
                     </div>
                     <div class="col-md-2">
-                        <input type="time" name="hora" class="form-control" id="hora" required>
+                        <input type="time" name="hora" value="{{old('hora')}}" class="form-control" id="hora" required>
                     </div>
                     <div class="col-md-2">
-                        <input disabled type="text" name="uf_mg" value="MG" class="form-control" id="uf_mg" placeholder="UF-MG">
+                        <input disabled type="text" name="uf_mg" value="MG" class="form-control" placeholder="UF-MG">
                     </div>
                 </div>
             </fieldset>
@@ -132,35 +139,35 @@
                 <legend>Identificação da Infração</legend>
                 <div class="row p-2">
                     <div class="col-md-3">
-                        <input type="text" name="codigo_infracao" class="form-control" id="UpCase"
+                        <input type="text" name="codigo_infracao" value="{{old('codigo_infracao')}}" class="form-control"
                             placeholder="Código da Infração" required>
                     </div>
                     <div class="col-md-9">
-                        <input type="text" name="descricao" class="form-control" id="UpCase" placeholder="Descrição"
+                        <input type="text" name="descricao" value="{{old('descricao')}}" class="form-control" placeholder="Descrição"
                             required>
                     </div>
                 </div>
                 <div class="row p-2">
                     <div class="col-md-3">
-                        <input type="text" name="equipamento_afericao" class="form-control" id="UpCase"
+                        <input type="text" name="equipamento_afericao" value="{{old('equipamento_afericao')}}" class="form-control"
                             placeholder="Equipamento Aferição">
                     </div>
                     <div class="col-md-3">
-                        <input type="text" name="medicao_realizada" class="form-control" id="UpCase"
+                        <input type="text" name="medicao_realizada" value="{{old('medicao_realizada')}}" class="form-control"
                             placeholder="Medição Realizada">
                     </div>
                     <div class="col-md-3">
-                        <input type="text" name="limite_regulamentado" class="form-control" id="UpCase"
+                        <input type="text" name="limite_regulamentado" value="{{old('limite_regulamentado')}}" class="form-control"
                             placeholder="Limite Regulamentado">
                     </div>
                     <div class="col-md-3">
-                        <input type="text" name="valor_considerado" class="form-control" id="UpCase"
+                        <input type="text" name="valor_considerado" value="{{old('valor_considerado')}}" class="form-control"
                             placeholder="Valor Considerado">
                     </div>
                 </div>
                 <div class="row p-2">
                     <div class="col-md">
-                        <textarea type="text" name="observacoes" class="form-control" id="UpCase" placeholder="Observações"></textarea>
+                        <textarea type="text" name="observacoes" value="{{old('observacoes')}}" class="form-control" placeholder="Observações"></textarea>
                     </div>
                 </div>
             </fieldset>
@@ -168,7 +175,7 @@
                 <legend>Medida Administrativa</legend>
                 <div class="row p-2">
                     <div class="col-md-4">
-                        <select id="medida1" name="medida1" class="form-select">
+                        <select id="medida1" name="medida1" value="{{old('medida1')}}" class="form-select">
                             <option value="null" selected>Selecione</option>
                             <option value="REMOÇÃO">Remoção</option>
                             <option value="RECOLHIMENTO">Recolhimento</option>
@@ -178,7 +185,7 @@
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <select id="medida2" name="medida2" class="form-select">
+                        <select id="medida2" name="medida2" value="{{old('medida2')}}" class="form-select">
                             <option value="null" selected>Selecione</option>
                             <option value="CNH/PPD/ACC">CNH/PPD/ACC</option>
                             <option value="CRLV">CRLV</option>
@@ -187,7 +194,7 @@
                         </select>
                     </div>
                     <div class="col-md-4">
-                        <input type="text" name="ficha_vistoria" class="form-control" id="UpCase"
+                        <input type="text" name="ficha_vistoria" value="{{old('ficha_vistoria')}}" class="form-control"
                             placeholder="Ficha de Vistoria">
                     </div>
                 </div>
@@ -197,7 +204,7 @@
                 <legend>Anexar Imagem</legend>
                 <div class="row p-2">
                     <div class="col-md-6">
-                        <input type="file" name="imagem" class="form-control" id="imagem" placeholder="Carregar Imagens">
+                        <input type="file" name="imagem" value="{{old('imagem')}}" class="form-control" id="imagem" placeholder="Carregar Imagens">
                     </div>
                 </div>
             </fieldset>

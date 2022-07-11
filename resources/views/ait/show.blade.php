@@ -1,8 +1,9 @@
 @extends('home')
 @section('index')
-    <div class="container-fluid w-75 m-auto p-4 position-static h-auto d-md-inline-flex d-none shadow-sm" id="table">
+
+    <div class="container-fluid w-75 m-auto p-4 position-static h-auto d-md-inline-flex d-none shadow-sm">
         <table class="table table-primary table-striped caption-top">
-            <caption>Lista de Autuações Pendentes</caption>
+            <caption>Resultado da Pesquisa</caption>
             <thead class="table-dark">
                 <tr>
                     <th scope="col">Código AIT</th>
@@ -13,8 +14,9 @@
                     <th scope="col"></th>
                 </tr>
             </thead>
+
             <tbody>
-                @foreach ($aitsFalse as $ait)
+                @foreach ($aits as $key => $ait)
                     <tr>
                         <th scope="row">{{$ait->cod_ait}}</th>
                         <td>{{$ait->codigo_infracao}}</td>
@@ -22,12 +24,11 @@
                         <td>{{$ait->nome}}</td>
                         <td>{{$ait->matricula}}</td>
                         <td>
-                            <a href="{{route('edit.ait', ['id' => $ait->cod_ait])}}"> <button class="btn btn-sm btn-secondary">Iniciar</button></a>
+                            <a href="{{route('imprimir.ait', ['id' => $ait->id])}}"> <button class="btn btn-sm btn-secondary">Visualisar</button></a>
                         </td>
                     </tr>
                 @endforeach
             </tbody>
         </table>
     </div>
-    <br>
 @endsection

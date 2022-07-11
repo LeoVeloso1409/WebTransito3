@@ -77,9 +77,11 @@ class AitController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function imprimir($id)
     {
-        //
+        $ait = Ait::where("cod_ait", $id)->first();
+
+        return view('ait.imprimir', compact('ait'));
     }
 
     /**
@@ -93,7 +95,7 @@ class AitController extends Controller
         // dd("edit");
         $ait = Ait::where("cod_ait", $id)->first();
 
-        //dd($ait);
+        dd($ait);
 
         return view('ait.edit', compact('ait'));
     }
@@ -110,20 +112,20 @@ class AitController extends Controller
         //$ait = Ait::where(['cod_ait'=>$id])->update($request->all());
 
         $request->validate([
-            'placa' => ['required', 'max:7', 'min:7'],
-            'marca' => ['required'],
-            'modelo' => ['required'],
-            'cor' => ['required'],
-            'pais' => ['required'],
-            'especie' => ['required'],
-            'logradouro' => ['required'],
-            'numero' => ['required'],
-            'bairro' => ['required'],
-            'cidade' => ['required'],
-            'data' => ['required', 'date'],
-            'hora' => ['required'],
-            'codigo_infracao' => ['required', 'numeric'],
-            'descricao' => ['required'],
+            'placa' => 'required|max:7|min:7',
+            'marca' => 'required',
+            'modelo' => 'required',
+            'cor' => 'required',
+            'pais' => 'required',
+            'especie' => 'required',
+            'logradouro' => 'required',
+            'numero' => 'required',
+            'bairro' => 'required',
+            'cidade' => 'required',
+            'data' => 'required|date',
+            'hora' => 'required',
+            'codigo_infracao' => 'required|numeric',
+            'descricao' => 'required',
 
         ]);
 

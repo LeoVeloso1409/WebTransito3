@@ -32,9 +32,9 @@ class AuthenticatedSessionController extends Controller
     {
         $user_id = Auth::user()->id;
         $aitsFalse = Ait::all()->where('user_id', $user_id )->where('status', false)->sortBy('cod_ait');
-        $aitsTrue = Ait::all()->where('user_id', $user_id )->where('status', true)->sortBy('cod_ait');
 
-        return view('index', compact('aitsFalse', 'aitsTrue'));
+
+        return view('index', compact('aitsFalse'));
     }
 
     public function store(LoginRequest $request)

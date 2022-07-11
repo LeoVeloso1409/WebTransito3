@@ -51,7 +51,19 @@
                                         <a class="btn nav-link" href="{{route('register')}}">Cadastrar Usuário</a>
                                     </li>
                                     <li class="nav-item">
-                                        <a class="btn nav-link" href="{{route('pesquisar')}}">Pesquisar</a>
+                                        <div class="collapse navbar-collapse" id="navbarNavDarkDropdown">
+                                            <ul class="navbar-nav">
+                                              <li class="nav-item dropdown">
+                                                <a class="nav-link dropdown-toggle" id="navbarDarkDropdownMenuLink" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                                  Pesquisar
+                                                </a>
+                                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="navbarDarkDropdownMenuLink">
+                                                  <li><a class="dropdown-item" href="{{route('meus_registros')}}">Meus Registros</a></li>
+                                                  <li><a class="dropdown-item" href="{{route('pesquisar')}}">Pesquisa Avançada</a></li>
+                                                </ul>
+                                              </li>
+                                            </ul>
+                                        </div>
                                     </li>
                                 </ul>
                                 <ul class="col-lg navbar-nav mr-auto mt-2 mt-lg-0">
@@ -163,7 +175,7 @@
                 </div>
             </div>
 
-
+            <script src="{{ asset('js/app.js') }}" type="text/js"></script>
 
             <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
             <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
